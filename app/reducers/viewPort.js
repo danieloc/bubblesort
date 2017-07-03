@@ -4,7 +4,7 @@
 const initialState = {
     width: 500,
     height : 500,
-    sideBar : false
+    sideBar : true
 };
 
 export default function viewPort(state = initialState, action) {

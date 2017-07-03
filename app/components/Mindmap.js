@@ -23,8 +23,7 @@ export class Mindmap extends React.Component {
         this.getGraphData = this.getGraphData.bind(this);
     }
     componentWillMount() {
-        console.log("Fell in here");
-        this.props.dispatch(toggleSideBar(false));
+        this.props.dispatch(toggleSideBar(true));
     }
     getGraphData() {
         var data;
