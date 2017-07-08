@@ -39,6 +39,7 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 .idea
+.env
 node_modules/
 bower_components/
 
