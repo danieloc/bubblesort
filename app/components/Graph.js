@@ -495,10 +495,10 @@ export class Graph extends React.Component {
         const styles = {
             border: 'none',
             background: this.props.user.primaryColor,
-            background: '-webkit-linear-gradient(right top,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Safari 5.1 to 6.0 */
-            background: '-o-linear-gradient(top right,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Opera 11.1 to 12.0 */
-            background: '-moz-linear-gradient(top right,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Firefox 3.6 to 15 */
-            background: 'linear-gradient(to top right,' +this.props.user.primaryColor + ','+lighterColor+')',/* Standard syntax */
+            background: '-webkit-linear-gradient(left top,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Safari 5.1 to 6.0 */
+            background: '-o-linear-gradient(top left,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Opera 11.1 to 12.0 */
+            background: '-moz-linear-gradient(top left,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Firefox 3.6 to 15 */
+            background: 'linear-gradient(to top left,' +this.props.user.primaryColor + ','+lighterColor+')',/* Standard syntax */
             position: 'relative',
             height: '100%',
         };

@@ -125,7 +125,7 @@ export class Mindmap extends React.Component {
             return <span className="glyphicon glyphicon-chevron-right" onClick={() => this.toggleSideBar(false)} style={{float: 'right'}}></span>;
         }
         else
-            return <span className="glyphicon glyphicon-chevron-left" onClick={() => this.toggleSideBar(true)} style={{float: 'right'}}></span>;
+            return <span className="glyphicon glyphicon-chevron-left" onClick={() => this.toggleSideBar(true)} style={{float: 'right', backgroundColor:this.props.user.primaryColor}}></span>;
     }
 
     render() {
