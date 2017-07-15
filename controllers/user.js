@@ -82,7 +82,7 @@ exports.signupPost = function(req, res, next) {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      primaryColor : '#2196f3',
+      primaryColor : '#3f51b5',
       mindmapOption: "sprawl",
       isNewUser: true
     });
@@ -336,7 +336,7 @@ exports.authFacebook = function(req, res) {
               email: profile.email,
               picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=large',
               facebook: profile.id,
-              primaryColor : '#2196f3',
+              primaryColor : '3f51b5',
               mindmapOption: "sprawl",
               isNewUser : true
             });
@@ -404,7 +404,7 @@ exports.authGoogle = function(req, res) {
             email: profile.email,
             picture: profile.picture.replace('sz=50', 'sz=200'),
             google: profile.sub,
-            primaryColor : '#2196f3',
+            primaryColor : '3f51b5',
             mindmapOption: "sprawl",
             isNewUser: true
           });
