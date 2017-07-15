@@ -493,7 +493,7 @@ export class Graph extends React.Component {
         const {width, height} = this.props;
         var lighterColor = this.ColorLuminance(this.props.user.primaryColor, 0.9);
         const styles = {
-            border: '1px solid #323232',
+            border: 'none',
             background: this.props.user.primaryColor,
             background: '-webkit-linear-gradient(right top,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Safari 5.1 to 6.0 */
             background: '-o-linear-gradient(top right,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Opera 11.1 to 12.0 */
