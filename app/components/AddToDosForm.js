@@ -29,7 +29,8 @@ export class AddToDosForm extends React.Component {
     }
     render() {
         return (
-            <div className="container">
+            <div className="container" style={{marginTop:'20px'}}>
+                <br/>
                 <div className="panel">
                     <div className="panel-body">
                         <Messages messages={this.props.messages}/>

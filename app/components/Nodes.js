@@ -57,8 +57,9 @@ export class Nodes extends React.Component {
         if(this.props.user.nodes) {
             var lowerNavBars = <div></div>;
             var nodes = null;
+            depth++;
             if (node) {
-                depth++;
+
                 nodes = node.nodes;
                 if (nodes.length > 0 && this.props.indexList && this.props.indexList.length > depth) {
                     lowerNavBars = [this.getNavBars(nodes[this.props.indexList[depth - 1]], depth, i++)];
@@ -84,12 +85,15 @@ export class Nodes extends React.Component {
         return (
             <div>
                 {this.getNavBars(this.props.user, 0, 0)}
-                <div>
+                <div style={{marginTop:'20px'}}>
                     {shareNodeButton}
                     {deleteNodeButton}
                     {leaveNodeButton}
                 </div>
-                {collaborators}
+                <div style={{marginTop:'20px'}}>
+                    {collaborators}
+                </div>
+
             </div>
 
         );

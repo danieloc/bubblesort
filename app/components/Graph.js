@@ -468,12 +468,37 @@ export class Graph extends React.Component {
         }
     }
 
+    ColorLuminance(hex, lum) {
+
+        // validate hex string
+        hex = String(hex).replace(/[^0-9a-f]/gi, '');
+        if (hex.length < 6) {
+            hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+        }
+        lum = lum || 0;
+
+        // convert to decimal and change luminosity
+        var rgb = "#", c, i;
+        for (i = 0; i < 3; i++) {
+            c = parseInt(hex.substr(i*2,2), 16);
+            c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+            rgb += ("00"+c).substr(c.length);
+        }
+
+        return rgb;
+    }
+
 
     render() {
         const {width, height} = this.props;
+        var lighterColor = this.ColorLuminance(this.props.user.primaryColor, 0.5);
         const styles = {
             border: '1px solid #323232',
-            backgroundColor: this.props.user.primaryColor,
+            background: this.props.user.primaryColor,
+            background: '-webkit-linear-gradient(left,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')', /* For Safari 5.1 to 6.0 */
+            background: '-o-linear-gradient(right,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')', /* For Opera 11.1 to 12.0 */
+            background: '-moz-linear-gradient(right,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')', /* For Firefox 3.6 to 15 */
+            background: 'linear-gradient(to right,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')',/* Standard syntax */
             position: 'relative',
             height: '100%',
         };

@@ -12,9 +12,11 @@ export class NavBar extends React.Component {
         this.state = {
             depth : props.depth
         };
+        this.changeCurrentNode = this.changeCurrentNode.bind(this)
     }
 
     addNodeModal() {
+        console.log(this.state.depth);
         this.props.dispatch(getAddNodeModal(this.state.depth));
     }
 

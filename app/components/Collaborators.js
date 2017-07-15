@@ -13,7 +13,7 @@ export class Collaborators extends React.Component {
     getNodePathCollaborators() {
         return this.props.collaboratorList.map((collaborator, i) => {
             return (
-                <div key={i}>
+                <div key={i} style={{marginTop:'20px'}}>
                     <div className="col-sm-1">
                         <img src={collaborator.picture} className="collaboratorImage"/>
                         <p style={{float: 'center'}}>{collaborator.name}</p>

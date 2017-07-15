@@ -7,9 +7,9 @@ import { browserHistory } from 'react-router';
 // Sign in with Facebook
 export function facebookLogin() {
   const facebook = {
-    url: 'http://localhost:3000/auth/facebook',
-    clientId: '980220002068787',
-    redirectUri: 'http://localhost:3000/auth/facebook/callback',
+    url: 'https://bubblesortme.herokuapp.com/auth/facebook',
+    clientId: '668070150058413',
+    redirectUri: 'https://bubblesortme.herokuapp.com/auth/facebook/callback',
     authorizationUrl: 'https://www.facebook.com/v2.5/dialog/oauth',
     scope: 'email,user_location',
     width: 580,
