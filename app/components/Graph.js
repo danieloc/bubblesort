@@ -495,10 +495,10 @@ export class Graph extends React.Component {
         const styles = {
             border: '1px solid #323232',
             background: this.props.user.primaryColor,
-            background: '-webkit-linear-gradient(left,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')', /* For Safari 5.1 to 6.0 */
-            background: '-o-linear-gradient(right,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')', /* For Opera 11.1 to 12.0 */
-            background: '-moz-linear-gradient(right,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')', /* For Firefox 3.6 to 15 */
-            background: 'linear-gradient(to right,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')',/* Standard syntax */
+            background: '-webkit-linear-gradient(right top,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')', /* For Safari 5.1 to 6.0 */
+            background: '-o-linear-gradient(top right,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')', /* For Opera 11.1 to 12.0 */
+            background: '-moz-linear-gradient(top right,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')', /* For Firefox 3.6 to 15 */
+            background: 'linear-gradient(to top right,' +this.props.user.primaryColor + ','+lighterColor+','+this.props.user.primaryColor+')',/* Standard syntax */
             position: 'relative',
             height: '100%',
         };
