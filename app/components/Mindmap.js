@@ -137,7 +137,7 @@ export class Mindmap extends React.Component {
                 </div>
                 {this.getChevron()}
                 {this.getSideBar()}
-            </div>div>
+            </div>
         );
     }
 }
