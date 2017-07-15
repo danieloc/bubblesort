@@ -467,7 +467,7 @@ export class Graph extends React.Component {
             force.start();
         }
     }
-/*
+
     ColorLuminance(hex, lum) {
 
         // validate hex string
@@ -486,20 +486,19 @@ export class Graph extends React.Component {
         }
 
         return rgb;
-    }*/
+    }
 
 
     render() {
         const {width, height} = this.props;
-        /*var lighterColor = this.ColorLuminance(this.props.user.primaryColor, 0.5);*/
-        var silver = '#c0c0c0';
+        var lighterColor = this.ColorLuminance(this.props.user.primaryColor, 0.9);
         const styles = {
             border: '1px solid #323232',
             background: this.props.user.primaryColor,
-            background: '-webkit-linear-gradient(right top,' +this.props.user.primaryColor + ','+silver+')', /* For Safari 5.1 to 6.0 */
-            background: '-o-linear-gradient(top right,' +this.props.user.primaryColor + ','+silver+')', /* For Opera 11.1 to 12.0 */
-            background: '-moz-linear-gradient(top right,' +this.props.user.primaryColor + ','+silver+')', /* For Firefox 3.6 to 15 */
-            background: 'linear-gradient(to top right,' +this.props.user.primaryColor + ','+silver+')',/* Standard syntax */
+            background: '-webkit-linear-gradient(right top,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Safari 5.1 to 6.0 */
+            background: '-o-linear-gradient(top right,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Opera 11.1 to 12.0 */
+            background: '-moz-linear-gradient(top right,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Firefox 3.6 to 15 */
+            background: 'linear-gradient(to top right,' +this.props.user.primaryColor + ','+lighterColor+')',/* Standard syntax */
             position: 'relative',
             height: '100%',
         };
