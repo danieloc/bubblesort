@@ -24,13 +24,11 @@ export class Profile extends React.Component {
   }
   //Not using "handleChange" because that uses value - where the colorPicker uses color
   changeColor(event) {
-    console.log(event);
     this.setState({ color: event.hex });
   }
 
   handleProfileUpdate(event) {
     event.preventDefault();
-    console.log(this.state.color);
     this.props.dispatch(updateProfile(this.state, this.props.token));
   }
 

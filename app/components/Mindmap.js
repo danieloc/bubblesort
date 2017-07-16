@@ -28,7 +28,6 @@ export class Mindmap extends React.Component {
     getGraphData() {
         var data;
         if(this.props.user.mindmapOption === 'sprawl') {
-            console.log(JSON.stringify(this.props.user));
             data = {
                 "name": this.props.user.name,
                 "img": this.props.user.picture || this.props.user.gravatar,

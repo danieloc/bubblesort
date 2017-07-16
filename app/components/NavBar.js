@@ -16,7 +16,6 @@ export class NavBar extends React.Component {
     }
 
     addNodeModal() {
-        console.log(this.state.depth);
         this.props.dispatch(getAddNodeModal(this.state.depth));
     }
 
@@ -68,7 +67,6 @@ export class NavBar extends React.Component {
             this.props.dispatch(setParent(node, newIndexList, this.state.depth, last));
         }
         var newCollaborators = this.props.getNodeCollaborators(this.props.user.nodes, newIndexList, 0, false, [],0);
-        console.log(newCollaborators);
         this.props.dispatch(setCollaborators(newCollaborators));
     }
 

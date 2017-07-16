@@ -12,9 +12,7 @@ export class InvitationModal extends React.Component {
         super(props);
     }
     getNodesInvitedTo() {
-        console.log(this.props.user.nodes);
         return this.props.user.invitations.map((node, i) => {
-            console.log(node);
             return (
                 <div className="panel" key={i} >
                     <div className="panel-body">

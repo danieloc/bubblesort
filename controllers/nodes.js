@@ -41,7 +41,6 @@ exports.addToNode = function(req, res) {
                     var indexList = responseArray[2];
                     var isLast = responseArray[3];
                     var depth = responseArray[4];
-                    console.log(user.nodes);
                     user.save(function(err) {
                         if (err) {
                             done(err, user);
@@ -55,7 +54,6 @@ exports.addToNode = function(req, res) {
 
 
 function addNode(i, nodes, req, parentID) {
-    console.log(req.body.depth);
     if (i < req.body.depth) {
         i++;
         parentID = nodes[req.body.indexList[i - 2]]._id.valueOf();
@@ -83,7 +81,6 @@ function addNode(i, nodes, req, parentID) {
         });
         singleNode.save();
         if (!parentID) {
-            console.log("Should not be in here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             if (nodes.length !== 0) {
                 nodes.push(singleNode);
                 var indexList = req.body.indexList;
@@ -97,24 +94,15 @@ function addNode(i, nodes, req, parentID) {
             }
         }
         else {
-            console.log("Problem should be here!!");
-            console.log(parentID);
-            console.log("___________________________");
             UserSchema.Node.findOne({_id: parentID})
                 .then(function (node) {
-                    console.log("OLD NODES");
-                    console.log(node);
                     node.nodes.push(singleNode);
-                    console.log("NEW NODES");
-                    console.log(node);
                     return node;
                 }).then(function (node) {
                 node.save();
             });
             var islast = true;
             var depth = req.body.depth;
-            console.log("depth");
-            console.log(depth);
             var indexList = req.body.indexList;
             if (i === depth) {
                 if (depth < req.body.indexList.length) {
@@ -167,15 +155,11 @@ exports.deleteNode = function(req, res) {
                                 .remove()
                                 .exec(function (err, node) {
                                 });
-                            console.log("NodeLength");
-                            console.log(nodes.length);
                             nodes.splice(req.body.indexList[req.body.depth - 1], 1);
-                            console.log(nodes);
                             if(req.body.depth === 1 && nodes.length === 0) {
                                 return [nodes, null, [0], true];
                             }
                             if(req.body.last && nodes.length > 0) {
-                                console.log("If it's the last Node in the list and there is more than one in the list");
                                 nodeInformation = nodes[nodes.length - 1];
                                 indexList = req.body.indexList;
                                 indexList[req.body.depth -1] = req.body.indexList[req.body.depth -1] - 1;
@@ -184,7 +168,6 @@ exports.deleteNode = function(req, res) {
                                 }
                             }
                             if(!req.body.last && nodes.length > 0) {
-                                console.log("If it's not the last Node in the list and there is more than one in the list");
                                 nodeInformation = nodes[req.body.indexList[req.body.indexList.length - 1]];
                                 indexList = req.body.indexList;
                                 if(indexList[req.body.depth - 1] === nodes.length - 1) {
@@ -198,7 +181,6 @@ exports.deleteNode = function(req, res) {
                             i++;
                             var responseArray = deleteFromUser(i, nodes[req.body.indexList[i - 2]].nodes, req);
                             if(responseArray[1] === null) {
-                                console.log("If it was the last in the list and the lower bars length is now zero then fall in here.");
                                 responseArray[1] = nodes[req.body.indexList[req.body.indexList.length - 2]];
                                 indexList = req.body.indexList;
                                 indexList.splice(req.body.depth -1, 1);
@@ -268,14 +250,11 @@ exports.leaveNode = function(req, res) {
                                 }
                             });
                         });
-                    console.log(req.body.index);
                     nodes.splice(req.body.index, 1);
                     if(nodes.length === 0) {
                         nodeInformation = null;
                     }
                     else if(req.body.last && nodes.length > 0) {
-                        console.log("If it's the last Node in the list and there is more than one in the list");
-                        console.log(nodes[req.body.index - 1]);
                         nodeInformation = nodes[req.body.index - 1];
                         index = req.body.index - 2 ;
                         if(index === nodes.length - 1) {
@@ -283,7 +262,6 @@ exports.leaveNode = function(req, res) {
                         }
                     }
                     else if(!req.body.last && nodes.length > 0) {
-                        console.log("Not last and node length greater than one....");
                         nodeInformation = nodes[req.body.index];
                         index = req.body.index;
                         if(index === nodes.length - 1) {
@@ -340,16 +318,12 @@ exports.shareNode = function(req, res) {
                                     });
                                 }
                             }
-                            console.log(user);
                             if(user.invitations.length === 0)
                                 user.invitations = [node];
                             else {
                                 user.invitations.push(node);
                             }
                             ////////////////////////////////
-                            console.log(user);
-                            console.log(user.picture);
-                            console.log(req.body.emailToShare);
                             var collab = {
                                 name: user.name,
                                 email: req.body.emailToShare,
@@ -384,7 +358,6 @@ exports.acceptNode = function(req, res) {
         function(token, done) {
             UserSchema.User.findOne({  _id: req.user.id })
                 .then(function (user) {
-                    console.log(user);
                     var found = false;
                     var newNode;
                     var i = 0;
@@ -405,32 +378,23 @@ exports.acceptNode = function(req, res) {
                         }
                         i++;
                     }
-                    console.log("acc");
                     user.invitations = newInvitations;
-                    console.log(user);
-                    console.log("____________________");
-                    console.log(user.invitations);
                     user.save(function(err) {
                         if (err) {
                             done(err, user);
                         }
                     });
-                    console.log("USSSSERRRRRRR");
-                    console.log(user);
                     return user;
                 }).then(function (user){
                 UserSchema.Node.findOne({ _id : req.body.nodeID})
                     .exec(function(err, node) {
-                        console.log("About to start node");
                         ////////////////////////////////
                         var found = false;
                         var i = 0;
                         var newCollaborators = node.collaborators;
                         while(i < node.collaborators.length && found === false) {
                             var collabName = node.collaborators[i].email;
-                            console.log(req.body.email);
                             if(collabName === req.body.email) {
-                                console.log("IT WORKED ANYWAY");
                                 if(!req.body.accepted)
                                     newCollaborators.splice(i, 1);
                                 else if(req.body.accepted){

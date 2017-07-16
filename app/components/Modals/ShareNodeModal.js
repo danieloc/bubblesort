@@ -22,7 +22,6 @@ export class ShareNodeModal extends React.Component {
     handleReset(event) {
         event.preventDefault();
         var isAlreadyCollab = false;
-        console.log(this.props.collaboratorList);
         for(var i = 0; i < this.props.collaboratorList.length; i++) {
             if(this.state.email.toLowerCase() === this.props.collaboratorList[i]) {
                 isAlreadyCollab = true;

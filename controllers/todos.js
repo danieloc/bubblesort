@@ -33,15 +33,12 @@ exports.addTodos = function(req, res) {
             if(req.body.todoTitle.length < 1) {
                 return res.status(400).send({ msg: 'You have not given your goal a title!' });
             }
-            console.log("Entering User");
             UserSchema.User.findOne({  _id: req.user.id })
                 .exec(function(err, user) {
                     var i = 1;
-                    console.log("Entering Recursion");
                     var responseArray = addToDo(i, user.nodes[req.body.indexList[0]], req, null);
                     user.nodes[req.body.indexList[0]] = responseArray[0];
                     var nodeInformation = responseArray[1];
-                    console.log("Exited Recursion");
                     user.save(function (err) {
                         done(err, user);
                     });
@@ -52,10 +49,7 @@ exports.addTodos = function(req, res) {
 
 function addToDo(i , node, req) {
     if(i < req.body.depth) {
-        console.log("Doing Recursion");
         i++;
-        console.log(node);
-        console.log(req.body.indexList);
         var responseArray = addToDo(i, node.nodes[req.body.indexList[i - 1]], req);
         node.nodes[req.body.indexList[i - 1]] = responseArray[0];
         return [node, responseArray[1]];
@@ -66,11 +60,7 @@ function addToDo(i , node, req) {
             priority: req.body.todoPriority,
             completed: false
         });
-        console.log(singleToDo);
         singleToDo.save();
-        console.log("Finishing the save");
-        console.log("NODE");
-        console.log(node);
 
         UserSchema.Node.findOne({ "_id" : node._id})
             .then(function (node) {
@@ -105,11 +95,9 @@ exports.deleteToDo = function(req, res) {
             UserSchema.User.findOne({ _id: req.user.id})
                 .exec(function (err, user) {
                     var i = 1;
-                    console.log("Entering Recursion");
                     var responseArray = recursiveDeleteToDo(i, user.nodes[req.body.indexList[0]], req);
                     user.nodes[req.body.indexList[0]] = responseArray[0];
                     var nodeInformation = responseArray[1];
-                    console.log("Exited Recursion");
                     user.save(function (err) {
                         done(err, user);
                     });
@@ -120,10 +108,7 @@ exports.deleteToDo = function(req, res) {
 
 function recursiveDeleteToDo(i, node, req) {
     if(i < req.body.depth) {
-        console.log("Doing Recursion");
         i++;
-        console.log(node);
-        console.log(req.body.indexList);
         var responseArray = recursiveDeleteToDo(i, node.nodes[req.body.indexList[i - 1]], req);
         node.nodes[req.body.indexList[i - 1]] = responseArray[0];
         return [node, responseArray[1]];
@@ -138,15 +123,11 @@ function recursiveDeleteToDo(i, node, req) {
                 node.todos.splice(i, 1);
             }
         });
-        console.log("New Nodes________________");
-        console.log(node);
         return [node, node];
     }
 }
 
 exports.updateToDos = function(req, res) {
-    console.log(req.body.todoTitle);
-    console.log(req.body.todoPriority);
     req.assert('todoTitle', 'Goal name cannot be blank').notEmpty();
     req.assert('todoPriority', 'Priority cannot be blank').notEmpty();
 
@@ -172,11 +153,9 @@ exports.updateToDos = function(req, res) {
             UserSchema.User.findOne({   _id: req.user.id  })
                 .exec(function(err, user) {
                     var i = 1;
-                    console.log("Entering Recursion");
                     var responseArray = recursiveUpdateToDo(i, user.nodes[req.body.indexList[0]], req);
                     user.nodes[req.body.indexList[0]] = responseArray[0];
                     var nodeInformation = responseArray[1];
-                    console.log("Exited Recursion");
                     user.save(function (err) {
                         done(err, user);
                     });
@@ -187,19 +166,14 @@ exports.updateToDos = function(req, res) {
 
 function recursiveUpdateToDo(i, node, req) {
     if(i < req.body.depth) {
-        console.log("Doing Recursion");
         i++;
-        console.log(node);
-        console.log(req.body.indexList);
         var responseArray = recursiveUpdateToDo(i, node.nodes[req.body.indexList[i - 1]], req);
         node.nodes[req.body.indexList[i - 1]] = responseArray[0];
         return [node, responseArray[1]];
     }
     else if(i === req.body.depth) {
-        console.log(node);
         UserSchema.ToDo.findOne({ "_id" : req.body.todoID})
             .then(function (todo) {
-                console.log(todo);
                 todo.name = req.body.todoTitle;
                 todo.priority = req.body.todoPriority;
                 todo.completed = req.body.archived;

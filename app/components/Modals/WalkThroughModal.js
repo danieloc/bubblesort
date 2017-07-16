@@ -49,7 +49,7 @@ export class WalkThroughModal extends React.Component {
             </div>;
         if(this.props.walkThroughState === 3)
             return <div><legend>Start Creating beautiful Mindmaps now!</legend>
-                <img src='img/mindmap.PNG' width={300} height = {280}/>
+                <img src='mindmap.PNG' width={300} height = {280}/>
                 </div>;
     }
 

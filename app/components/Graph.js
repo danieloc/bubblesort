@@ -64,7 +64,6 @@ export class Graph extends React.Component {
 
         d3.select(window).on("resize", resize.bind(this));
         function resize() {
-            console.log("Wubalubadubdub");
             mindmapToSideBarRatio = 1;
             if(this.props.sideBar)
                 mindmapToSideBarRatio = 0.75;
@@ -341,14 +340,9 @@ export class Graph extends React.Component {
                     for (i = 0; i <= displayedNodes.length && nodeFound === false; i++) {
                         if (nodeName === dataArray[dataArrayIndex][0].name) {
                             nodeFound = true;
-                            console.log("Whoo");
                             if (dataArray.length > 1) {
-                                console.log("Hoo");
-                                console.log(dataArray);
-                                console.log(dataArrayIndex);
                                 dataArray.splice(dataArrayIndex, dataArrayIndex + 1);
                                 dataArrayIndex--;
-                                console.log(dataArray);
                                 displayedNodes = dataArray[dataArrayIndex];
                                 myChart.remove();
                                 while (links.length > 0) {

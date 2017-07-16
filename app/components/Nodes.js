@@ -18,7 +18,6 @@ export class Nodes extends React.Component {
         if(this.props.user.nodes.length > 0) {
             this.props.dispatch(setParent(this.props.user.nodes[0], [0], 1, false, 1));
             var newCollaborators = this.getNodeCollaborators(this.props.user.nodes, [0], 0, false, [],0);
-            console.log(newCollaborators);
             this.props.dispatch(setCollaborators(newCollaborators));
         }
     }
@@ -29,21 +28,17 @@ export class Nodes extends React.Component {
     getNodeCollaborators(nodes, indexList, n, ownerFound) {
         var nodeCollabs =[];
         if(this.props.user.email !== nodes[indexList[n]].owner.email && ownerFound === false) {
-            console.log(1);
             nodeCollabs.push(nodes[indexList[n]].owner);
             ownerFound = true;
         }
         nodes[indexList[n]].collaborators.map((collaborator, i) => {
             if(collaborator.email !== this.props.user.email) {
-                console.log(2);
                 nodeCollabs.push(collaborator);
             }
         });
         if(indexList.length > n+1) {
-            console.log(3);
             var lowerNodeCollabs = this.getNodeCollaborators(nodes[indexList[n]].nodes, indexList, n+1, ownerFound);
             if(lowerNodeCollabs !== null) {
-                console.log("LOWER NODES");
                 var allTags = [];
                 allTags.push.apply(allTags, nodeCollabs);
                 allTags.push.apply(allTags, lowerNodeCollabs);
