@@ -29,7 +29,7 @@ export function facebookLogin() {
 // Sign in with Google
 export function googleLogin() {
   const google = {
-    url: 'https://bubblesortme.herokuapp.com',
+    url: 'https://bubblesortme.herokuapp.com/auth/google',
     clientId: '483681507842-tf4l4cdso0c1icibverlr0unrd6s8ujp.apps.googleusercontent.com',
     redirectUri: 'https://bubblesortme.herokuapp.com/auth/google/callback',
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
