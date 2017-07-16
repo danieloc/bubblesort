@@ -30,7 +30,7 @@ export function facebookLogin() {
 export function googleLogin() {
   const google = {
     url: 'http://localhost:3000/auth/google',
-    clientId: '814958990796-p1centjebv1k0htp3am05tfg5k10nl0k.apps.googleusercontent.com',
+    clientId: '483681507842-tf4l4cdso0c1icibverlr0unrd6s8ujp.apps.googleusercontent.com',
     redirectUri: 'http://localhost:3000/auth/google/callback',
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
     scope: 'openid profile email',
