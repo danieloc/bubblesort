@@ -215,6 +215,8 @@ function exchangeCodeForToken({ oauthData, config, window, interval, dispatch })
 }
 
 function signIn({ token, user, window, interval, dispatch }) {
+  console.log("USER");
+  console.log(user);
   return new Promise((resolve, reject) => {
     dispatch({
       type: 'OAUTH_SUCCESS',
