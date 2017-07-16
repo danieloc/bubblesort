@@ -14,15 +14,38 @@ export class Archived extends React.Component {
 
     displayArchiveToDosOrNothing() {
         var achivedToDos = this.displayArchiveToDos(this.props.user, null);
+        function ColorLuminance(hex, lum) {
+
+            // validate hex string
+            hex = String(hex).replace(/[^0-9a-f]/gi, '');
+            if (hex.length < 6) {
+                hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+            }
+            lum = lum || 0;
+
+            // convert to decimal and change luminosity
+            var rgb = "#", c, i;
+            for (i = 0; i < 3; i++) {
+                c = parseInt(hex.substr(i*2,2), 16);
+                c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+                rgb += ("00"+c).substr(c.length);
+            }
+
+            return rgb;
+        }
         if(achivedToDos.length > 0) {
             return achivedToDos.map((todo, i) => {
                 return <SingleArchivedToDo key={i} index={i} obj={todo.obj} pathArr = {todo.pathArr} ></SingleArchivedToDo>;
             })
         }
         else {
-            var userColor = this.props.user.primaryColor;
+            var lighterColor = ColorLuminance(this.props.user.primaryColor, 0.9);
             const styles = {
-                backgroundColor: userColor,
+                background: this.props.user.primaryColor,
+                background: '-webkit-linear-gradient(left top,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Safari 5.1 to 6.0 */
+                background: '-o-linear-gradient(top left,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Opera 11.1 to 12.0 */
+                background: '-moz-linear-gradient(top left,' +this.props.user.primaryColor + ','+lighterColor+')', /* For Firefox 3.6 to 15 */
+                background: 'linear-gradient(to top left,' +this.props.user.primaryColor + ','+lighterColor+')',/* Standard syntax */
             };
             return <div className="archivedBack" style={styles}><h1 className="noArchived">You do not have any archived ToDos</h1></div>
         }
