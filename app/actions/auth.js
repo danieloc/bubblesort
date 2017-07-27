@@ -31,7 +31,7 @@ export function login(email, password) {
             type: 'LOGIN_FAILURE',
             messages: Array.isArray(json) ? json : [json]
           });
-        });
+        })
       }
     });
   };
