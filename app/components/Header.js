@@ -55,7 +55,7 @@ export class Header extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <IndexLink to="/" className="navbar-brand">Bubblesort</IndexLink>
+            <IndexLink to="/" className="navbar-brand"  data-content="Bubblesort">Bubblesort</IndexLink>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">

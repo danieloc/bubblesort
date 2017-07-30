@@ -9,7 +9,6 @@ var config = {
   ],
   output: {
     path: path.join(__dirname, 'public', 'js' ),
-    hot: true,
     filename: 'bundle.js',
     publicPath: '/js'
   },
