@@ -30,7 +30,7 @@ export class WalkThroughModal extends React.Component {
     }
     getWalkThroughPage() {
         if(this.props.walkThroughState === 1)
-            return <div><legend>Bubblesort is a mindmapping application</legend>
+            return <div><legend>Bubblesortme is a mindmapping application</legend>
                 <p>A Persons brain processes visual information far quicker than it does text,
                     which makes Mind Maps a great tool. As a result of organising information visually,
                     it’s simple to understand tricky concepts and engage more with the ideas that you’ve been thinking about.
@@ -55,7 +55,7 @@ export class WalkThroughModal extends React.Component {
 
     render() {
         return(
-            <ModalWrapper title="Welcome to Bubblesort"
+            <ModalWrapper title="Welcome to Bubblesortme"
                           width={400}
                           showOk={false}
             >

@@ -106,6 +106,7 @@ export class Mindmap extends React.Component {
         if(this.props.sideBar) {
             return (
                 <div style={sideBarStyle}>
+                    {this.getStartMessage()}
                     <Nodes />
                 </div>);
         }
@@ -121,21 +122,29 @@ export class Mindmap extends React.Component {
 
     getChevron() {
         if(this.props.sideBar) {
-            return <span className="glyphicon glyphicon-chevron-right" onClick={() => this.toggleSideBar(false)} style={{float: 'right', paddingRight:'20px'}}></span>;
+            return (<div><span className="glyphicon glyphicon-chevron-right" onClick={() => this.toggleSideBar(false)} style={{float: 'right', paddingRight:'20px'}}></span></div>);
         }
         else
-            return <span className="glyphicon glyphicon-chevron-left" onClick={() => this.toggleSideBar(true)} style={{float: 'right', paddingRight:'20px'}}></span>;
+            return (<div><span className="glyphicon glyphicon-chevron-left" onClick={() => this.toggleSideBar(true)} style={{float: 'right', paddingRight:'20px'}}></span></div>);
+    }
+
+    getStartMessage() {
+        if(!this.props.user.nodes.length > 0) {
+            return <p style={{alignContent: 'center'}}>Use this Toolbar to create your very first node!</p>
+        }
     }
 
     render() {
 
         return (
-            <div>
+            <div style={{display:'flex'}}>
                 <div  style = {{ float: 'left', backgroundColor:this.props.user.primaryColor}}>
                     <Graph data = {this.getGraphData()} getGraphData = {this.getGraphData}/>
                 </div>
-                {this.getChevron()}
-                {this.getSideBar()}
+                <div style={{display:'flex'}}>
+                    {this.getChevron()}
+                    {this.getSideBar()}
+                </div>
             </div>
         );
     }
