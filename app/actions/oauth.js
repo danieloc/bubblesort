@@ -9,7 +9,7 @@ export function facebookLogin() {
   const facebook = {
     url: 'https://bubblesortme.com/auth/facebook',
     clientId: '668070150058413',
-    redirectUri: 'https://bubblesortme.herokuapp.com/auth/facebook/callback',
+    redirectUri: 'https://bubblesortme.com/auth/facebook/callback',
     authorizationUrl: 'https://www.facebook.com/v2.5/dialog/oauth',
     scope: 'email,user_location',
     width: 580,
