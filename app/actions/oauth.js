@@ -7,9 +7,9 @@ import { browserHistory } from 'react-router';
 // Sign in with Facebook
 export function facebookLogin() {
   const facebook = {
-    url: 'https://bubblesortme.com/auth/facebook',
+    url: 'https://www.bubblesortme.com/auth/facebook',
     clientId: '668070150058413',
-    redirectUri: 'https://bubblesortme.com/auth/facebook/callback',
+    redirectUri: 'https://www.bubblesortme.com/auth/facebook/callback',
     authorizationUrl: 'https://www.facebook.com/v2.5/dialog/oauth',
     scope: 'email,user_location',
     width: 580,
@@ -29,9 +29,9 @@ export function facebookLogin() {
 // Sign in with Google
 export function googleLogin() {
   const google = {
-    url: 'https://bubblesortme.com/auth/google',
+    url: 'https://www.bubblesortme.com/auth/google',
     clientId: '483681507842-tf4l4cdso0c1icibverlr0unrd6s8ujp.apps.googleusercontent.com',
-    redirectUri: 'https://bubblesortme.com/auth/google/callback',
+    redirectUri: 'https://www.bubblesortme.com/auth/google/callback',
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
     scope: 'openid profile email',
     width: 452,
