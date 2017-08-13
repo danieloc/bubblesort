@@ -104,7 +104,6 @@ if (app.get('env') === 'development') {
     noInfo: true,
     publicPath: config.output.publicPath
   }));
-  app.use(require('webpack-hot-middleware')(compiler));
 }
 app.post('/nodes', userController.ensureAuthenticated, nodeController.addToNode);
 app.put('/nodes/share', userController.ensureAuthenticated, nodeController.shareNode);

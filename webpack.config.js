@@ -2,9 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 
 var config = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   entry: [
-    'webpack-hot-middleware/client',
     './app/main'
   ],
   output: {
@@ -13,7 +12,6 @@ var config = {
     publicPath: '/js'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
@@ -29,12 +27,7 @@ var config = {
         query: {
           plugins: [
             ['react-transform', {
-              transforms: [
-                {
-                  transform: 'react-transform-hmr',
-                  imports: ['react'],
-                  locals: ['module']
-                }, {
+              transforms: [{
                   transform: 'react-transform-catch-errors',
                   imports: ['react', 'redbox-react']
                 }
