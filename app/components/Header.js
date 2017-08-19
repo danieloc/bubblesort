@@ -46,7 +46,7 @@ export class Header extends React.Component {
       </ul>
     );
     return (
-      <nav className="navbar navbar-default navbar-static-top" style={{zIndex:2}}>
+      <nav className="navbar navbar-default navbar-static-top noPaddingBottom" style={{zIndex:2}}>
         <div className="container">
           <div className="navbar-header">
             <button type="button" data-toggle="collapse" data-target="#navbar" className="navbar-toggle collapsed">
@@ -55,7 +55,7 @@ export class Header extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <IndexLink to="/" className="navbar-brand"  data-content="Bubblesortme">Bubblesortme</IndexLink>
+            <IndexLink to="/mindmap" className="navbar-brand"  data-content="Bubblesortme">Bubblesortme</IndexLink>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">

@@ -10,16 +10,17 @@ import Reset from './components/Account/Reset';
 import Mindmap from './components/Mindmap';
 import GoalPage from './components/GoalPage';
 import Archived from './components/Archived';
+import Landing from './components/Landing/LandingPage';
 
 export default function getRoutes(store) {
   const ensureAuthenticated = (nextState, replace) => {
     if (!store.getState().auth.token) {
-      replace('/login');
+      replace('/landing');
     }
   };
   const skipIfAuthenticated = (nextState, replace) => {
     if (store.getState().auth.token) {
-      replace('/');
+      replace('/mindmap');
     }
   };
   const clearMessages = () => {
@@ -29,10 +30,11 @@ export default function getRoutes(store) {
   };
   return (
     <Route path="/" component={App}>
-      <IndexRoute component={Mindmap} onLeave={clearMessages} onEnter={ensureAuthenticated}/>
+      <IndexRoute component={Landing} onLeave={clearMessages} onEnter={ensureAuthenticated}/>
       <Route path="/mindmap" component={Mindmap} onEnter={ensureAuthenticated} onLeave={clearMessages} />
       <Route path="/nodes" component={GoalPage} onEnter={ensureAuthenticated} onLeave={clearMessages} />
       <Route path="/archived" component={Archived} onEnter={ensureAuthenticated} onLeave={clearMessages} />
+        <Route path="/landing" component={Landing} onEnter={skipIfAuthenticated} onLeave={clearMessages} />
       <Route path="/login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
       <Route path="/signup" component={Signup} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
       <Route path="/account" component={Profile} onEnter={ensureAuthenticated} onLeave={clearMessages}/>

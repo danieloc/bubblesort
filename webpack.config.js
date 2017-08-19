@@ -38,7 +38,7 @@ var config = {
       },
       {
         test: /\.(jpg|png|svg|ico)$/,
-        loader: 'file-loader',
+        loader: 'file-loader?limit=1000000000000000',
         options: {
           name: '/images/.[hash].[ext]',
         },

@@ -79,7 +79,7 @@ export class NavBar extends React.Component {
     render() {
         return (
             <div>
-                <nav className="navbar navbar-default navbar-static-top" style={{zIndex:1}} >
+                <nav className="navbar nodeNav navbar-default navbar-static-top" style={{zIndex:1}} >
                     <div id="navbar" className="navbar-collapse collapse">
                         <ul className="nav navbar-nav">
                             {this.getNodes()}
