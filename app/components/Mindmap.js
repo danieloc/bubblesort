@@ -129,7 +129,7 @@ export class Mindmap extends React.Component {
     }
 
     getStartMessage() {
-        if(!this.props.user.nodes.length > 0) {
+        if(this.props.user && !this.props.user.nodes.length > 0) {
             return <p style={{alignContent: 'center'}}>Use this Toolbar to create your very first node!</p>
         }
     }
