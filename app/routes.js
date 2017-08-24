@@ -30,7 +30,7 @@ export default function getRoutes(store) {
   };
   return (
     <Route path="/" component={App}>
-      <IndexRoute component={Mindmap} onLeave={clearMessages} onEnter={ensureAuthenticated}/>
+      <IndexRoute component={Landing} onLeave={clearMessages} onEnter={skipIfAuthenticated()}/>
       <Route path="/mindmap" component={Mindmap} onEnter={ensureAuthenticated} onLeave={clearMessages} />
       <Route path="/nodes" component={GoalPage} onEnter={ensureAuthenticated} onLeave={clearMessages} />
       <Route path="/archived" component={Archived} onEnter={ensureAuthenticated} onLeave={clearMessages} />
