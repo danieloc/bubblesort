@@ -17,14 +17,14 @@ export class LandingPage extends React.Component {
                     <Link className = 'gradientBtn logInHeader' to="/signup" id="">Sign Up</Link>
                     <div className="verticalCenterHeader">
                         <div className="headerContentCenter">
-                            <h2 className="headerMainTxt">Get planning done.</h2>
+                            <h2 className="headerMainTxt">Get Mindmappinng done.</h2>
                         </div>
                         <div className="macbookImg"></div>
                         </div>
                 </div>
                 <div className="row nopadding" id="row2">
                     <div className="col-md-12 nopadding">
-                        <h3 className="rowSubheading">A goal without a plan is just a wish.</h3>
+                        <h3 className="rowSubheading">A goal without any planning is just a wish.</h3>
                         <p className="rowText">Brainstorming could help you accomplish anything. Set goals and get things done.</p>
                         <div className="goalVideoContainer">
                             <div className="goalVideoImg"></div>
@@ -34,7 +34,7 @@ export class LandingPage extends React.Component {
                 <div className="row nopadding">
                     <div className="col-md-12 nopadding signUpImgBG">
                         <h3 className="rowSubheading signUpSubTxt" id="row5">Sign up now</h3>
-                        <p className="rowText rowTxtSignUp" id="row5" >Sign up to be one of the first to use Bubblesortme.</p>
+                        <p className="rowText rowTxtSignUp" id="row5" >Bubblesortme is still in its Beta stage. Sign up to be one of the first to use Bubblesortme.</p>
                         <Link to='/signup' className="bottomSignInButton" id="row5" >SIGN UP</Link>
                     </div>
                 </div>
