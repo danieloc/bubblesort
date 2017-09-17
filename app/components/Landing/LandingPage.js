@@ -17,7 +17,7 @@ export class LandingPage extends React.Component {
                     <Link className = 'gradientBtn logInHeader' to="/signup" id="">Sign Up</Link>
                     <div className="verticalCenterHeader">
                         <div className="headerContentCenter">
-                            <h2 className="headerMainTxt">Get Mindmappinng done.</h2>
+                            <h2 className="headerMainTxt">Get Mindmapping done.</h2>
                         </div>
                         <div className="macbookImg"></div>
                         </div>
