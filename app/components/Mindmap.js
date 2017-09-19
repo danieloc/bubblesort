@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import Graph from './Graph';
 import { getWalkThrough } from '../actions/modals';
 import { getInvitationModal } from '../actions/modals'
-import { toggleSideBar } from '../actions/viewPortActions';
+import { toggleSideBar, toggleTodos } from '../actions/viewPortActions';
+import Toggle from 'react-bootstrap-toggle';
 import _ from 'lodash';
 import Nodes from './Nodes';
 
@@ -14,6 +15,9 @@ export class Mindmap extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            todosVisable : false
+        }
         if (this.props.user.isNewUser) {
             this.props.dispatch(getWalkThrough());
         }
@@ -21,9 +25,19 @@ export class Mindmap extends React.Component {
             this.props.dispatch(getInvitationModal());
         }
         this.getGraphData = this.getGraphData.bind(this);
+        this.todoButtons = this.todoButtons.bind(this);
     }
     componentWillMount() {
         this.props.dispatch(toggleSideBar(true));
+    }
+
+    componentDidUpdate() {
+        if(!_.isEqual(this.state.todosVisable, this.props.todos)) {
+            this.setState({
+                todosVisable: this.props.todos
+            });
+            this.forceUpdate();
+        }
     }
     getGraphData() {
         var data;
@@ -34,7 +48,7 @@ export class Mindmap extends React.Component {
                 "children": []
             };
             if (this.props.user.nodes.length > 0) {
-                var nodeData = getOptionOneData(this.props.user.nodes);
+                var nodeData = getOptionOneData(this.props.user.nodes, this.props.todos);
                 data.children = nodeData;
             }
         }
@@ -44,13 +58,13 @@ export class Mindmap extends React.Component {
                 "img": this.props.user.picture || this.props.user.gravatar,
             }];
             if(this.props.user.nodes.length > 0) {
-                var nodeData = getOptionTwoData(this.props.user.nodes);
+                var nodeData = getOptionTwoData(this.props.user.nodes, this.props.todos);
                 data = _.concat(data, nodeData);
             }
         }
         return data;
 
-        function getOptionOneData(nodes) {
+        function getOptionOneData(nodes, showToDos) {
             var nodeData = null;
             nodes.forEach(function (node) {
                 var singleNodeData = {
@@ -58,8 +72,17 @@ export class Mindmap extends React.Component {
                     "children" : []
                 };
                 if (node.nodes && node.nodes.length > 0) {
-                    var subNodes = getOptionOneData(node.nodes);
+                    var subNodes = getOptionOneData(node.nodes, showToDos);
                     singleNodeData.children = _.concat(singleNodeData.children, subNodes);
+                }
+                if(showToDos && node.todos.length > 0) {
+                    node.todos.forEach(function (todo) {
+                        var singleToDoData = [{
+                            "name": todo.name,
+                            "todo" : true
+                        }];
+                       singleNodeData.children =  _.concat(singleNodeData.children, singleToDoData);
+                    });
                 }
                 if(nodeData === null) {
                     nodeData = [singleNodeData];
@@ -70,7 +93,7 @@ export class Mindmap extends React.Component {
             });
             return nodeData;
         }
-        function getOptionTwoData(nodes) {
+        function getOptionTwoData(nodes, showToDos) {
             var nodeData = null;
             nodes.forEach(function (node) {
                 var singleNodeData = {
@@ -83,7 +106,7 @@ export class Mindmap extends React.Component {
                         'target': [0],
                         'subDocs': [{'name': node.name}]
                     };
-                    var subNodes = getOptionTwoData(node.nodes);
+                    var subNodes = getOptionTwoData(node.nodes, showToDos);
                     singleNodeData.subDocs = _.concat(singleNodeData, subNodes);
                 }
                 if(nodeData === null) {
@@ -97,6 +120,21 @@ export class Mindmap extends React.Component {
         }
     }
 
+    todoButtons() {
+        if(this.props.todos) {
+            return (<div>
+                    <button className= 'todoSwitch btn-primary' onClick={() => this.props.dispatch(toggleTodos(true))} >Show ToDos</button>
+                    <button className= 'todoSwitch btn-default' onClick={() => this.props.dispatch(toggleTodos(false))} >Hide ToDos</button>
+                </div>);
+        }
+        else {
+            return (<div>
+                    <button className= 'todoSwitch btn-default' onClick={() => this.props.dispatch(toggleTodos(true))} >Show ToDos</button>
+                    <button className= 'todoSwitch btn-primary' onClick={() => this.props.dispatch(toggleTodos(false))} >Hide ToDos</button>
+                </div>);
+            }
+    }
+
     getSideBar() {
         var sideBarStyle = {
             width: this.props.width * 0.25,
@@ -108,6 +146,7 @@ export class Mindmap extends React.Component {
                 <div style={sideBarStyle}>
                     {this.getStartMessage()}
                     <Nodes />
+                    {this.todoButtons()}
                 </div>);
         }
         else
@@ -139,7 +178,7 @@ export class Mindmap extends React.Component {
         return (
             <div style={{display:'flex'}}>
                 <div  style = {{ float: 'left', backgroundColor:this.props.user.primaryColor}}>
-                    <Graph data = {this.getGraphData()} getGraphData = {this.getGraphData}/>
+                    <Graph getGraphData = {this.getGraphData}/>
                 </div>
                 <div style={{display:'flex'}}>
                     {this.getChevron()}
@@ -157,6 +196,7 @@ const mapStateToProps = (state) => {
         height: state.viewPort.height,
         activeModal: state.modals.activeModal,
         sideBar : state.viewPort.sideBar,
+        todos : state.viewPort.todos
     }
 };
 

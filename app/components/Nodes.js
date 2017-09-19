@@ -92,7 +92,6 @@ export class Nodes extends React.Component {
                 </div>
 
             </div>
-
         );
     }
 }

@@ -19,3 +19,9 @@ export function toggleSideBar(state) {
         toggleState: state
     };
 }
+export function toggleTodos(state) {
+    return {
+        type: 'TOGGLE_TODOS',
+        toggleState: state
+    };
+}

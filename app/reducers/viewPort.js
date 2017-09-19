@@ -4,7 +4,8 @@
 const initialState = {
     width: 500,
     height : 500,
-    sideBar : true
+    sideBar : true,
+    todos : false
 };
 
 export default function viewPort(state = initialState, action) {
@@ -21,6 +22,10 @@ export default function viewPort(state = initialState, action) {
             return Object.assign({}, state, {
                 sideBar : action.toggleState
             });
+        case 'TOGGLE_TODOS' :
+        return Object.assign({}, state, {
+            todos : action.toggleState
+        });
         default:
             return state;
     }

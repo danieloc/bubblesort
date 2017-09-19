@@ -48,7 +48,7 @@ export class Graph extends React.Component {
 
         //displayedNodes is used as the data that is being displayed.
 
-        var displayedNodes = this.props.data;
+        var displayedNodes = this.props.getGraphData();
         var mindmapToSideBarRatio = 1;
         if(this.props.sideBar)
             mindmapToSideBarRatio = 0.75;
@@ -113,7 +113,12 @@ export class Graph extends React.Component {
                 .attr("fill", "none")
                 .attr("stroke-width", "2px")
                 // .attr("marker-end", "url(#end)")
-                .style("stroke", "#eee");
+                .style("stroke", function(d) {
+                    if(!d.target.todo)
+                        return "#eee"
+                    else if (d.target.todo)
+                        return "#555"
+                });
 
 
             // Exit any old paths.
@@ -146,7 +151,12 @@ export class Graph extends React.Component {
                 .attr("r", function (d) {
                     return circle_radius(d)
                 })
-                .style("fill", "#eee");
+                .style("fill", function(d){
+                    if(d.todo) 
+                        return '#a32638';
+                    else 
+                        return '#eee';
+                });
 
             nodeEnter.append("svg:image")
                 .attr("xlink:href", function (d) {
@@ -230,6 +240,8 @@ export class Graph extends React.Component {
             else if (d._children) {
                 return d._children.length > 0 ? 10 : 5;
             }
+            else if(d.todo == true)
+                return 5;
         }
 
         function flatten(root) {
@@ -262,7 +274,7 @@ export class Graph extends React.Component {
 
         //displayedNodes is used as the data that is being displayed.
 
-        var displayedNodes = this.props.data;
+        var displayedNodes = this.props.getGraphData();
         var Obj = this;
         var dataArrayIndex = 0;
         var dataArray = [displayedNodes];
@@ -510,7 +522,8 @@ const mapStateToProps = (state) => {
         user: state.auth.user,
         width: state.viewPort.width,
         height: state.viewPort.height,
-        sideBar: state.viewPort.sideBar
+        sideBar: state.viewPort.sideBar,
+        todos: state.viewPort.todos
     }
 };
 
