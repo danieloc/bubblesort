@@ -113,18 +113,21 @@ export class Mindmap extends React.Component {
     }
 
     todoButtons() {
-        if(this.props.todos) {
-            return (<div>
-                    <button className= 'todoSwitch btn-primary' onClick={() => this.props.dispatch(toggleTodos(true))} >Show ToDos</button>
-                    <button className= 'todoSwitch btn-default' onClick={() => this.props.dispatch(toggleTodos(false))} >Hide ToDos</button>
-                </div>);
-        }
-        else {
-            return (<div>
-                    <button className= 'todoSwitch btn-default' onClick={() => this.props.dispatch(toggleTodos(true))} >Show ToDos</button>
-                    <button className= 'todoSwitch btn-primary' onClick={() => this.props.dispatch(toggleTodos(false))} >Hide ToDos</button>
-                </div>);
+        if(this.props.node) {
+            if(this.props.todos) {
+                return (<div>
+                        <button className= 'todoSwitch btn-primary' onClick={() => this.props.dispatch(toggleTodos(true))} >Show ToDos</button>
+                        <button className= 'todoSwitch btn-default' onClick={() => this.props.dispatch(toggleTodos(false))} >Hide ToDos</button>
+                    </div>);
             }
+            else {
+                return (<div>
+                        <button className= 'todoSwitch btn-default' onClick={() => this.props.dispatch(toggleTodos(true))} >Show ToDos</button>
+                        <button className= 'todoSwitch btn-primary' onClick={() => this.props.dispatch(toggleTodos(false))} >Hide ToDos</button>
+                    </div>);
+            }
+        }
+        else return null;
     }
 
     getSideBar() {
@@ -188,7 +191,8 @@ const mapStateToProps = (state) => {
         height: state.viewPort.height,
         activeModal: state.modals.activeModal,
         sideBar : state.viewPort.sideBar,
-        todos : state.viewPort.todos
+        todos : state.viewPort.todos,
+        node : state.modals.node,
     }
 };
 
