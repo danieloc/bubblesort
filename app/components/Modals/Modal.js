@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import AddNodeModal from './AddNodeModal';
+import MembershipModal from './MembershipModal';
 import DeleteNodeModal from './DeleteNodeModal';
 import ShareNodeModal from './ShareNodeModal';
 import LeaveNodeModal from './LeaveNodeModal';
@@ -19,6 +20,9 @@ export class Modal extends React.Component {
         switch (this.props.activeModal) {
             case MODALS.NODE_MODAL :
                 ModalBody = AddNodeModal;
+                break;
+             case MODALS.MEMBERSHIP_MODAL :
+                ModalBody = MembershipModal;
                 break;
             case MODALS.DELETE_NODE_MODAL :
                 ModalBody = DeleteNodeModal;

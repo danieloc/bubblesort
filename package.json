@@ -68,6 +68,7 @@
     "request": "^2.69.0",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
+    "stripe": "^5.0.0",
     "style-loader": "^0.13.1",
     "supertest": "^1.2.0",
     "url-loader": "^0.5.7",

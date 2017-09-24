@@ -37,6 +37,7 @@ exports.addToNode = function(req, res) {
                     var i = 1;
                     var responseArray = addNode(i, user.nodes, req, null);
                     user.nodes = responseArray[0];
+                    user.nodeCount = user.nodeCount +1;
                     var nodeInformation = responseArray[1];
                     var indexList = responseArray[2];
                     var isLast = responseArray[3];
@@ -204,6 +205,12 @@ exports.deleteNode = function(req, res) {
                     else {
                         user.nodes = null;
                     }
+                    user.nodeCount = user.nodeCount -1;
+                    user.save(function(err) {
+                        if (err) {
+                            done(err, user);
+                        }
+                    });
                     res.send({user: user.toJSON(), nodeInformation: nodeInformation, indexList : indexList, last: last});
                     ///////////////////////////////
                 });

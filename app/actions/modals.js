@@ -13,6 +13,13 @@ export function getAddNodeModal(depth) {
         depth : depth,
     };
 }
+
+export function requestMembershipModal() {
+    return {
+        type: 'MEMBERSHIP_MODAL',
+    };
+}
+
 export function getDeleteNodeModal() {
     return {
         type: 'DELETE_NODE_MODAL',

@@ -23,6 +23,10 @@ export default function modals(state = initialState, action) {
                 activeModal: MODALS.NODE_MODAL,
                 depth : action.depth
             });
+        case 'MEMBERSHIP_MODAL' :
+            return Object.assign({}, state, {
+                activeModal: MODALS.MEMBERSHIP_MODAL,
+            });
         case 'DELETE_NODE_MODAL' :
             return Object.assign({}, state, {
                 activeModal: MODALS.DELETE_NODE_MODAL,

@@ -4,7 +4,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router';
-import { getAddNodeModal, setParent, setCollaborators} from '../actions/modals';
+import { getAddNodeModal, setParent, setCollaborators, requestMembershipModal} from '../actions/modals';
 
 export class NavBar extends React.Component {
     constructor(props) {
@@ -16,7 +16,12 @@ export class NavBar extends React.Component {
     }
 
     addNodeModal() {
-        this.props.dispatch(getAddNodeModal(this.state.depth));
+        if(this.props.user.nodeCount < 30) {
+            this.props.dispatch(getAddNodeModal(this.state.depth));
+        }
+        else {
+            this.props.dispatch(requestMembershipModal());
+        }
     }
 
 
@@ -75,7 +80,6 @@ export class NavBar extends React.Component {
         if((this.props.node && this.props.user.email === this.props.node.owner.email) || this.props.depth === 1)
             return (<li><Link onClick={() => this.addNodeModal(this.state.depth)}><span className = "glyphicon glyphicon-plus-sign"></span></Link></li>);
     }
-
     render() {
         return (
             <div>

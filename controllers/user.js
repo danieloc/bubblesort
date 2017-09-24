@@ -84,6 +84,8 @@ exports.signupPost = function(req, res, next) {
       password: req.body.password,
       primaryColor : '#3f51b5',
       mindmapOption: "sprawl",
+      accountType: 'Bronze',
+      nodeCount: 0,
       isNewUser: true
     });
     user.save(function(err) {
@@ -338,6 +340,8 @@ exports.authFacebook = function(req, res) {
               facebook: profile.id,
               primaryColor : '#3f51b5',
               mindmapOption: "sprawl",
+              accountType: 'Bronze',
+              nodeCount: 0,
               isNewUser : true
             });
             user.save(function(err) {
@@ -406,6 +410,8 @@ exports.authGoogle = function(req, res) {
             google: profile.sub,
             primaryColor : '#3f51b5',
             mindmapOption: "sprawl",
+            accountType: 'Bronze',
+            nodeCount: 0,
             isNewUser: true
           });
           user.save(function(err) {
