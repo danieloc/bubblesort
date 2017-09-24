@@ -31,14 +31,6 @@ export class Mindmap extends React.Component {
         this.props.dispatch(toggleSideBar(true));
     }
 
-    componentDidUpdate() {
-        if(!_.isEqual(this.state.todosVisable, this.props.todos)) {
-            this.setState({
-                todosVisable: this.props.todos
-            });
-            this.forceUpdate();
-        }
-    }
     getGraphData() {
         var data;
         if(this.props.user.mindmapOption === 'sprawl') {
@@ -178,7 +170,7 @@ export class Mindmap extends React.Component {
         return (
             <div style={{display:'flex'}}>
                 <div  style = {{ float: 'left', backgroundColor:this.props.user.primaryColor}}>
-                    <Graph getGraphData = {this.getGraphData}/>
+                    <Graph getGraphData = {this.getGraphData} data = {this.getGraphData()}/>
                 </div>
                 <div style={{display:'flex'}}>
                     {this.getChevron()}

@@ -10,7 +10,7 @@ import _ from 'lodash';
 export class Graph extends React.Component {
     constructor(props) {
         super(props);
-        var data = this.props.getGraphData();
+        var data = this.props.data;
         this.state = {
             sideBar: false,
             data: data
@@ -48,7 +48,7 @@ export class Graph extends React.Component {
 
         //displayedNodes is used as the data that is being displayed.
 
-        var displayedNodes = this.props.getGraphData();
+        var displayedNodes = this.props.data;
         var mindmapToSideBarRatio = 1;
         if(this.props.sideBar)
             mindmapToSideBarRatio = 0.75;
@@ -274,7 +274,7 @@ export class Graph extends React.Component {
 
         //displayedNodes is used as the data that is being displayed.
 
-        var displayedNodes = this.props.getGraphData();
+        var displayedNodes = this.props.data;
         var Obj = this;
         var dataArrayIndex = 0;
         var dataArray = [displayedNodes];
