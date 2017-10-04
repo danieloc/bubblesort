@@ -17,18 +17,35 @@ export class LandingPage extends React.Component {
                     <Link className = 'gradientBtn logInHeader' to="/signup" id="">Sign Up</Link>
                     <div className="verticalCenterHeader">
                         <div className="headerContentCenter">
-                            <h2 className="headerMainTxt">Get Mindmapping done.</h2>
+                            <h2 className="headerMainTxt">A simplistic mind map tool.</h2>
                         </div>
                         <div className="macbookImg"></div>
                         </div>
                 </div>
                 <div className="row nopadding" id="row2">
                     <div className="col-md-12 nopadding">
-                        <h3 className="rowSubheading">A goal without any planning is just a wish.</h3>
-                        <p className="rowText">Brainstorming could help you accomplish anything. Set goals and get things done.</p>
-                        <div className="goalVideoContainer">
+                        <h3 className="rowSubheading">Fast and Responsibe Visualisations.</h3>
+
+                    
+                        <div className="col-md-12 goalVideoContainer">
                             <div className="goalVideoImg"></div>
                         </div>
+                        <div className="col-md-12 nopadding">
+                        <div className="col-md-6 nopadding">
+
+                        <h2 className = "rowText posLeftText">Why Mindmap?</h2>
+                        <p className = "rowText posLeftText">
+                            A Persons brain processes visual information far quicker than it does text which makes Mind Maps a great tool. As a result of organising information visually it’s simple to understand tricky concepts and engage more with the ideas that you’ve been thinking about. You can visually represent the links between concepts, you can plan your ideas more easily - share them or explore concepts in greater depth.
+                        </p>
+                        </div>
+                        <div className="col-md-6 nopadding">
+                        <h2 className = "rowText posRightText">Why Bubblesortme?</h2>
+                        <p className = "rowText posRightText">
+                            Bubblesortme is simple tool and its power stems directly from its simplicity. Using this tool you may quickly and easily structure out their ideas in to separate and branching trees. Mind mapping helps you to plan and to feel like you’ve conceptualise every aspect needed. Because you can visually see it – the order, the hierarchy and the overlap. It’s all there on one page, in this visual network and it’s beautiful. They can clarify just about anything.
+                        </p>
+                        </div>
+                        </div>
+
                     </div>
                 </div>
                 <div className="row nopadding">
