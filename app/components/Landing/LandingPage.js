@@ -24,7 +24,7 @@ export class LandingPage extends React.Component {
                 </div>
                 <div className="row nopadding" id="row2">
                     <div className="col-md-12 nopadding">
-                        <h3 className="rowSubheading">Fast and Responsibe Visualisations.</h3>
+                        <h3 className="rowSubheading">Fast and Responsive Visualisations.</h3>
 
                     
                         <div className="col-md-12 goalVideoContainer">
