@@ -233,3 +233,37 @@ export function deleteAccount(token) {
     });
   };
 }
+
+export function takePayment(stripeToken, email, token) {
+    return (dispatch) => {
+        return fetch('/takepayment', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                stripeToken: stripeToken,
+                email: email,
+            })
+        }).then((response) => {
+            if(response.ok) {
+                return response.json().then((json) => {
+                    dispatch({
+                      type: 'PAYMENT_SUCCESS',
+                      token: json.token,
+                      user: json.user
+                    });
+                });
+            }
+            else {
+                return response.json().then((json) => {
+                    dispatch({
+                        type: 'PAYMENT_FAILURE',
+                        messages: Array.isArray(json) ? json : [json]
+                    });
+                });
+            }
+        });
+    };
+}

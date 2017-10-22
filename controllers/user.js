@@ -6,6 +6,17 @@ var moment = require('moment');
 var request = require('request');
 var qs = require('querystring');
 var UserSchema = require('../models/User');
+var stripe = require("stripe")("sk_test_fEGf9HV8OmOAkE8G1Cd6350I");
+
+// stripe.plans.create({
+//   name: "Basic Plan",
+//   id: "basic-monthly",
+//   interval: "month",
+//   currency: "usd",
+//   amount: 0,
+// }, function(err, plan) {
+//   // asynchronously called
+// });
 
 function generateToken(user) {
   var payload = {
@@ -423,6 +434,58 @@ exports.authGoogle = function(req, res) {
   });
 };
 
-exports.authGoogleCallback = function(req, res) {
+exports.authGoogleCallback = function(req, res, next) {
   res.render('loading', { layout: false });
 };
+
+/**
+ * PUT /takePayment
+ * Sign in with Google
+ */
+/*exports.takePayment = function(req, res, next) {
+    async.waterfall([
+        function(done) {
+            crypto.randomBytes(16, function(err, buf) {
+                var token = buf.toString('hex');
+                done(err, token);
+            });
+        },
+        function(token, done) {
+          
+        }
+      ]);
+};*/
+
+exports.takePayment = function(req, res, next) {
+
+  UserSchema.User.findOne({ email: req.body.email }, function(err, user) {
+    if (!user) {
+      return res.status(401).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account. ' +
+      'Double-check your email address and try again.'
+      });
+    }
+    var customer;
+    // Create a Customer:
+    stripe.customers.create({
+      email: req.body.email,
+      source: req.body.stripeToken.id,
+    }).then(function(customer) {
+      console.log(customer);
+      // YOUR CODE: Save the customer ID and other info in a database for later.
+      var theCustomer = customer;
+      return stripe.charges.create({
+        amount: 1000,
+        currency: "eur",
+        customer: customer.id,
+      });
+    }).then(function(charge) {
+      console.log(charge);
+      // Use and save the charge info.
+      var chargeAmount = 1000;
+      user.accountType = 'Gold';
+        user.save(function(err) {
+        res.send({ token: generateToken(user), user: user.toJSON(), msg: 'Your account has been upgraded.' });
+      });
+    });
+  });
+}

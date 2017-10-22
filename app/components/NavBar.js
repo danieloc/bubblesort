@@ -4,7 +4,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router';
-import { getAddNodeModal, setParent, setCollaborators, requestMembershipModal} from '../actions/modals';
+import { getAddNodeModal, setParent, setCollaborators, requestMembershipModal, maximumLimitReached} from '../actions/modals';
 
 export class NavBar extends React.Component {
     constructor(props) {
@@ -15,9 +15,12 @@ export class NavBar extends React.Component {
         this.changeCurrentNode = this.changeCurrentNode.bind(this)
     }
 
-    addNodeModal() {
-        if(this.props.user.nodeCount < 30) {
+    addNodeModal(depth, accountType) {
+        if(this.props.user.nodeCount < 9 || (accountType === 'Gold' && this.props.user.nodeCount < 30)) {
             this.props.dispatch(getAddNodeModal(this.state.depth));
+        }
+        else if(accountType === 'Gold') {
+            this.props.dispatch(maximumLimitReached());
         }
         else {
             this.props.dispatch(requestMembershipModal());
@@ -25,7 +28,7 @@ export class NavBar extends React.Component {
     }
 
 
-    getNodes() {
+    getNodes(user) {
         if(this.props.nodes && this.props.nodes.length > 0 && this.props.node) {
             return this.props.nodes.map((node, i) => {
                 var className = "inActive";
@@ -76,9 +79,9 @@ export class NavBar extends React.Component {
     }
 
 
-    getPlusIcon() {
+    getPlusIcon(accountType) {
         if((this.props.node && this.props.user.email === this.props.node.owner.email) || this.props.depth === 1)
-            return (<li><Link onClick={() => this.addNodeModal(this.state.depth)}><span className = "glyphicon glyphicon-plus-sign"></span></Link></li>);
+            return (<li><Link onClick={() => this.addNodeModal(this.state.depth, accountType)}><span className = "glyphicon glyphicon-plus-sign"></span></Link></li>);
     }
     render() {
         return (
@@ -87,7 +90,7 @@ export class NavBar extends React.Component {
                     <div id="navbar" className="navbar-collapse collapse">
                         <ul className="nav navbar-nav">
                             {this.getNodes()}
-                            {this.getPlusIcon()}
+                            {this.getPlusIcon(this.props.user.accountType)}
                         </ul>
                     </div>
                 </nav>

@@ -117,6 +117,7 @@ app.put('/todos/unarchive', userController.ensureAuthenticated, todoController.u
 app.put('/account', userController.ensureAuthenticated, userController.accountPut);
 app.put('/account/walkthrough', userController.ensureAuthenticated, modalController.accountWalkThroughFinished);
 app.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
+app.post('/takepayment', userController.ensureAuthenticated, userController.takePayment);
 app.post('/signup', userController.signupPost);
 app.post('/login', userController.loginPost);
 app.post('/forgot', userController.forgotPost);

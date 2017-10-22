@@ -27,6 +27,10 @@ export default function modals(state = initialState, action) {
             return Object.assign({}, state, {
                 activeModal: MODALS.MEMBERSHIP_MODAL,
             });
+        case 'LIMIT_REACHED' : 
+            return Object.assign({}, state, {
+                activeModal: MODALS.LIMIT_REACHED,
+            });
         case 'DELETE_NODE_MODAL' :
             return Object.assign({}, state, {
                 activeModal: MODALS.DELETE_NODE_MODAL,
@@ -67,6 +71,10 @@ export default function modals(state = initialState, action) {
             return Object.assign({}, state, {
                 activeModal: MODALS.NONE,
                 parentName : null
+            });
+        case 'PAYMENT_SUCCESS' : 
+            return Object.assign({}, state, {
+                    activeModal: MODALS.NONE
             });
         case 'WALK_THROUGH_MODAL' :
             return Object.assign({}, state, {

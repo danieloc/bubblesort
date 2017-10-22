@@ -20,6 +20,12 @@ export function requestMembershipModal() {
     };
 }
 
+export function maximumLimitReached() {
+    return {
+        type: 'LIMIT_REACHED',
+    };
+}
+
 export function getDeleteNodeModal() {
     return {
         type: 'DELETE_NODE_MODAL',
